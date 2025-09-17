@@ -1,22 +1,910 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Coming Soon!!</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            text-align: center;
-            padding-top: 20vh;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Media Routes — Service Delivery Platform</title>
+  <meta name="description" content="Carrier-grade Service Delivery Platform for Telecoms and OTT vendors — fintech & money transfer focused." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue-50: #eff6ff;
+      --blue-100: #dbeafe;
+      --blue-200: #bfdbfe;
+      --blue-300: #93c5fd;
+      --blue-400: #60a5fa;
+      --blue-500: #3b82f6;
+      --blue-600: #2563eb;
+      --blue-700: #1d4ed8;
+      --blue-800: #1e40af;
+      --blue-900: #1e3a8a;
+      --white: #ffffff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--gray-900);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Utility Classes */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .justify-center { justify-content: center; }
+    .gap-2 { gap: 0.5rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-6 { gap: 1.5rem; }
+    .gap-8 { gap: 2rem; }
+    .mt-4 { margin-top: 1rem; }
+    .mt-6 { margin-top: 1.5rem; }
+    .mt-8 { margin-top: 2rem; }
+    .mt-12 { margin-top: 3rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .rounded { border-radius: 0.5rem; }
+    .rounded-lg { border-radius: 0.75rem; }
+    .rounded-xl { border-radius: 1rem; }
+    .rounded-2xl { border-radius: 1.5rem; }
+    .rounded-full { border-radius: 9999px; }
+    .shadow { box-shadow: var(--shadow-md); }
+    .shadow-lg { box-shadow: var(--shadow-lg); }
+    .shadow-xl { box-shadow: var(--shadow-xl); }
+    .shadow-2xl { box-shadow: var(--shadow-2xl); }
+    .text-sm { font-size: 0.875rem; }
+    .text-base { font-size: 1rem; }
+    .text-lg { font-size: 1.125rem; }
+    .text-xl { font-size: 1.25rem; }
+    .text-2xl { font-size: 1.5rem; }
+    .text-3xl { font-size: 1.875rem; }
+    .text-4xl { font-size: 2.25rem; }
+    .text-5xl { font-size: 3rem; }
+    .text-6xl { font-size: 3.75rem; }
+    .font-light { font-weight: 300; }
+    .font-normal { font-weight: 400; }
+    .font-medium { font-weight: 500; }
+    .font-semibold { font-weight: 600; }
+    .font-bold { font-weight: 700; }
+    .font-extrabold { font-weight: 800; }
+    .muted { color: var(--gray-700); }
+    .text-primary { color: var(--blue-600); }
+    .bg-primary { background-color: var(--blue-600); }
+    .bg-blue { background-color: var(--blue-600); }
+    .bg-blue-light { background-color: var(--blue-50); }
+
+    /* Header */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    nav {
+      padding: 1rem 0;
+    }
+
+    .brand {
+      font-weight: 700;
+      color: var(--blue-600);
+      font-size: 1.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--gray-800);
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 0;
+      text-decoration: none;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--blue-600);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue-600);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .cta {
+      background: var(--blue-600);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-xl);
+      background: var(--blue-700);
+    }
+
+    .cta-secondary {
+      background: transparent;
+      color: var(--blue-600);
+      border: 2px solid var(--blue-600);
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cta-secondary:hover {
+      background: var(--blue-600);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Mobile Navigation */
+    .hamburger {
+      display: none;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger:hover {
+      background: var(--gray-100);
+    }
+
+    .hamburger svg {
+      transition: transform 0.3s ease;
+    }
+
+    .hamburger.active svg {
+      transform: rotate(90deg);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 4rem 0 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--white);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 4rem;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      color: var(--gray-900);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--gray-800);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .hero-card {
+      background: var(--white);
+      padding: 2.5rem;
+      border-radius: 1.5rem;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid var(--gray-200);
+      margin-top: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .hero-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .kpi {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .kpi-item {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--white);
+      border-radius: 1rem;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .kpi .value {
+      font-weight: 800;
+      font-size: 2rem;
+      color: var(--blue-600);
+      margin-bottom: 0.5rem;
+    }
+
+    .kpi .label {
+      color: var(--gray-700);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--white);
+      padding: 2.5rem;
+      border-radius: 1.5rem;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--gray-200);
+      transition: all 0.3s ease;
+      margin-top: 2rem;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 1rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .feature-card {
+      padding: 2rem;
+      background: var(--white);
+      border-radius: 1rem;
+      border: 1px solid var(--gray-200);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--blue-300);
+    }
+
+    .feature-card h4 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 1rem;
+    }
+
+    /* Lists */
+    .list {
+      margin-top: 1rem;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .list li {
+      margin-bottom: 0.75rem;
+      position: relative;
+      padding-left: 1.5rem;
+      color: var(--gray-800);
+      line-height: 1.6;
+    }
+
+    .list li::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--blue-600);
+      border-radius: 50%;
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+    }
+
+    /* Contact Section */
+    .contact {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 1.5rem;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--gray-200);
+    }
+
+    .contact h4 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 1rem;
+    }
+
+    .contact p {
+      color: var(--gray-800);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact .link {
+      color: var(--blue-600);
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .contact .link:hover {
+      color: var(--blue-700);
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 4rem;
+      padding: 3rem 0;
+      background: var(--white);
+      color: var(--gray-800);
+      border-top: 1px solid var(--gray-200);
+    }
+
+    footer .brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--blue-600);
+    }
+
+    footer .muted {
+      color: var(--gray-600);
+    }
+
+    footer .flex {
+      min-height: 60px;
+    }
+
+    footer .brand {
+      margin-bottom: 0.5rem;
+    }
+
+    .brand-mark {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .brand-mark .logo {
+      width: 48px;
+      height: 48px;
+      background: var(--blue-600);
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+    }
+
+    .brand-mark .logo::before {
+      content: 'MR';
+      color: white;
+      font-weight: 700;
+      font-size: 0.875rem;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      
+      .container {
+        padding: 0 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        padding: 2rem;
+        border-radius: 0 0 1rem 1rem;
+        box-shadow: var(--shadow-xl);
+        gap: 1rem;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .hamburger {
+        display: inline-flex;
+      }
+
+      .hero {
+        padding: 2rem 0 4rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1.125rem;
+      }
+
+      .hero-card {
+        padding: 2rem;
+      }
+
+      .card {
+        padding: 2rem;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .kpi {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .kpi-item {
+        padding: 1rem;
+      }
+
+      .kpi .value {
+        font-size: 1.5rem;
+      }
+
+      .contact {
+        padding: 1.5rem;
+      }
+
+      footer {
+        padding: 2rem 0;
+      }
+
+      footer .flex {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .hero-card {
+        padding: 1.5rem;
+      }
+
+      .card {
+        padding: 1.5rem;
+      }
+
+      .kpi {
+        grid-template-columns: 1fr;
+      }
+
+      .cta {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
+      }
+
+      .cta-secondary {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
+      }
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --white: #0f172a;
+        --gray-50: #1e293b;
+        --gray-100: #334155;
+        --gray-200: #475569;
+        --gray-300: #64748b;
+        --gray-400: #94a3b8;
+        --gray-500: #cbd5e1;
+        --gray-600: #e2e8f0;
+        --gray-700: #f1f5f9;
+        --gray-800: #f8fafc;
+        --gray-900: #ffffff;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.querySelector('.hamburger');
+      const menu = document.querySelector('.nav-links');
+      
+      btn?.addEventListener('click', () => {
+        menu.classList.toggle('show');
+        btn.classList.toggle('active');
+      });
+
+      // Close menu when clicking on a link and smooth scroll
+      const navLinks = document.querySelectorAll('.nav-links a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href');
+          
+          if (targetId === '#overview') {
+            // Scroll to top for overview link
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          } else if (targetId.startsWith('#')) {
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              const headerHeight = 80;
+              const targetPosition = targetElement.offsetTop - headerHeight;
+              
+              window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+              });
+            }
+          }
+          
+          menu.classList.remove('show');
+          btn.classList.remove('active');
+        });
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!btn.contains(e.target) && !menu.contains(e.target)) {
+          menu.classList.remove('show');
+          btn.classList.remove('active');
         }
-        
-        h1 {
-            font-size: 48px;
-            color: #333;
+      });
+
+      // Add scroll effect to header
+      let lastScrollY = window.scrollY;
+      const header = document.querySelector('header');
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+          header.style.background = 'var(--white)';
+          header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+        } else {
+          header.style.background = 'var(--white)';
+          header.style.boxShadow = 'none';
         }
-    </style>
+        lastScrollY = window.scrollY;
+      });
+
+      // Add animation to elements on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in-up');
+          }
+        });
+      }, observerOptions);
+
+      // Observe all cards and sections
+      document.querySelectorAll('.card, .hero-card, .feature-card').forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
 </head>
 <body>
-    <h1>Coming Soon!!</h1>
+
+<header>
+  <div class="container">
+    <nav class="flex items-center justify-between">
+      <div class="brand-mark flex items-center">
+        <span class="logo" aria-hidden="true"></span>
+        <div>
+          <div class="brand">Media Routes</div>
+          <div class="muted text-sm">Service Delivery Platform</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="nav-links">
+          <a href="#overview">Overview</a>
+          <a href="#interfaces">Interfaces</a>
+          <a href="#devops">DevOps</a>
+          <a href="#installations">Installations</a>
+          <!-- <a href="#contact">Contact</a> -->
+        </div>
+        <button class="hamburger" aria-label="Open menu">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="hero-content">
+    <div>
+      <h1>Carrier-grade Service Delivery Platform for Telecom & OTT</h1>
+      <p>A secure, scalable platform built for fintech and high-volume money transfers. Combine telecom-grade interfaces with modern OTT delivery to launch value-added services quickly.</p>
+      <div class="hero-card">
+          <h3 class="text-xl font-bold mb-6">Key Capabilities</h3>
+        <ul class="list muted">
+          <li>High throughput charging & transaction processing</li>
+          <li>Multi-interface support (Telecom & OTT)</li>
+          <li>Distributed database design — scales to millions of users</li>
+          <li>Operational tools for SysOps, NetOps, SecOps, and more</li>
+        </ul>
+        <div class="kpi">
+            <div class="kpi-item">
+            <div class="value">2M+</div>
+              <div class="label">Daily charging txns</div>
+          </div>
+            <div class="kpi-item">
+            <div class="value">4–8M</div>
+              <div class="label">Mobile money txns/day</div>
+            </div>
+          </div>
+          <div class="mt-8 flex gap-4 flex-wrap">
+          <a class="cta" href="#contact">Get in Touch</a>
+            <a class="cta-secondary" href="#installations">See Installations</a>
+        </div>
+      </div>
+    </div>
+    <aside>
+      <div class="contact">
+        <h4 class="text-lg mb-4">Contact Sales</h4>
+        <p class="muted">Email: <a class="link" href="mailto:sales@mediaroutes.com">sales@mediaroutes.com</a></p>
+        <p class="muted mt-2">86-401 Burnhamthorpe Road W.<br>Mississauga, ON L5B 3C2<br>Canada</p>
+        <div class="mt-6">
+            <h5 class="text-sm mb-2 font-semibold">Live Installations</h5>
+          <div class="card mb-4">
+            <strong>Wateen Telecom</strong>
+            <div class="muted text-sm">2M online charging transactions/day</div>
+          </div>
+          <div class="card">
+            <strong>Safarifone — Somalia & Djibouti</strong>
+            <div class="muted text-sm">4–8M mobile money transfers/day</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+    </div>
+  </section>
+
+  <section id="interfaces" class="card">
+    <h3 class="text-xl font-bold">Interfaces</h3>
+    <div class="grid-3">
+      <div class="feature-card">
+        <h4 class="text-base font-semibold">Telecom Interfaces</h4>
+        <ul class="list muted">
+          <li>Diameter</li>
+          <li>Radius</li>
+          <li>SIP / Media</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <h4 class="text-base font-semibold">OTT Interfaces</h4>
+        <ul class="list muted">
+          <li>Web Apps</li>
+          <li>Mobile Apps (Android, iOS)</li>
+          <li>Desktop Apps (Windows, MacOS, Linux)</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <h4 class="text-base font-semibold">Backend Support</h4>
+        <p class="muted">Scalable distributed database design supporting millions of users and thousands of concurrent transactions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="devops" class="card">
+    <h3 class="text-xl font-bold">DevOps & Operations</h3>
+    <p class="muted mt-2">Full support for operations ensuring monitoring, security, and governance.</p>
+    <div class="grid-3 mt-6">
+      <div class="feature-card">
+        <h4 class="font-semibold">System Operations</h4>
+        <p class="muted text-sm">Comprehensive system monitoring and management</p>
+      </div>
+      <div class="feature-card">
+        <h4 class="font-semibold">Network Operations</h4>
+        <p class="muted text-sm">Network performance and security monitoring</p>
+      </div>
+      <div class="feature-card">
+        <h4 class="font-semibold">Security Operations</h4>
+        <p class="muted text-sm">Advanced threat detection and response</p>
+      </div>
+      <div class="feature-card">
+        <h4 class="font-semibold">Financial Operations</h4>
+        <p class="muted text-sm">Cost optimization and resource management</p>
+      </div>
+      <div class="feature-card">
+        <h4 class="font-semibold">Data Operations</h4>
+        <p class="muted text-sm">Data pipeline management and analytics</p>
+      </div>
+      <div class="feature-card">
+        <h4 class="font-semibold">Database Operations</h4>
+        <p class="muted text-sm">Database performance and maintenance</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="installations" class="card">
+    <h3 class="text-xl font-bold">Selected Installations</h3>
+    <div class="grid-3 mt-6">
+      <div class="feature-card">
+        <h4 class="font-semibold text-primary">Wateen Telecom</h4>
+        <p class="muted">2M online charging transactions/day</p>
+        <div class="mt-2">
+          <span class="text-sm bg-primary text-white px-2 py-1 rounded">Live</span>
+        </div>
+      </div>
+      <div class="feature-card">
+        <h4 class="font-semibold text-primary">Safarifone</h4>
+        <p class="muted">4–8M mobile money transactions/day</p>
+        <p class="muted text-sm">Somalia & Djibouti</p>
+        <div class="mt-2">
+          <span class="text-sm bg-primary text-white px-2 py-1 rounded">Live</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section id="contact" class="card">
+    <h3 class="text-xl font-bold">Get in Touch</h3>
+    <p class="muted">Telecom operators, OTT vendors, or fintech partners — reach out for a technical walkthrough and deployment plan.</p>
+    <div class="mt-6 flex gap-4 flex-wrap">
+      <a class="cta" href="mailto:sales@mediaroutes.com">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Email Us
+      </a>
+      <a class="cta-secondary" href="tel:+1686401">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Call
+      </a>
+    </div>
+  </section> -->
+
+  <footer>
+    <div class="flex justify-between items-center container">
+      <div>
+        <div class="brand">Media Routes</div>
+        <div class="muted text-sm">Carrier-grade Service Delivery Platform</div>
+      </div>
+      <div class="muted text-sm">© Media Routes — All Rights Reserved</div>
+    </div>
+  </footer>
+</main>
+
 </body>
 </html>
